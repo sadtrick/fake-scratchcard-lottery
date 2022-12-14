@@ -1,0 +1,15 @@
+---
+import config from "./_config.json";
+export async function getStaticPaths() {
+    const {["scratch-themes"]: themes} = config;
+
+    return themes.map((theme) => {
+        return {
+            params: { theme },
+        };
+    });
+}
+
+const { theme } = Astro.params;
+---
+{theme}

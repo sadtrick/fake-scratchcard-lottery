@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import config from "./_config.json";
+
+export async function getStaticPaths() {
+    const { ["scratch-themes"]: themes, user } = config;
+
+    return user
+        .map((person) => {
+            return themes.map((theme) => ({
+                params: {
+                    hash: person.hash,
+                    theme: !(person.blacklist as string[]).includes(theme)
+                        ? theme
+                        : undefined,
+                },
+                props: { ...person, theme },
+            }));
+        })
+        .flat();
+}
+
+const { hash, theme } = Astro.params;
+const { name } = Astro.props;
+---
+
+<BaseLayout>
+    {hash}
+    {theme}
+    {name}
+</BaseLayout>
