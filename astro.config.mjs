@@ -7,5 +7,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
 	site: 'https://sadtrick@github.io',
 	base: '/fake-scratchcard-lottery',
-	integrations: [mdx(), sitemap()],
+	integrations: [mdx(), sitemap({
+		filter: (page) => !page.match("\/lottery\/([a-zA-Z]+)")
+	})],
 });
