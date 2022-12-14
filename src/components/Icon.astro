@@ -1,0 +1,24 @@
+---
+let {
+    src,
+    name,
+    pack
+} = Astro.props;
+
+if (pack) {
+    name = `${pack}:${name}`;
+}
+
+let innerHTML = "";
+try {
+    /* @vite-ignore */
+    const svg = await import(`${src}?raw`);
+    innerHTML = svg.default;
+} catch (error) {
+    throw new Error("Error : " + error);
+}
+
+// https://github.com/natemoo-re/astro-icon
+---
+
+<Fragment astro-icon={name} set:html={innerHTML} />

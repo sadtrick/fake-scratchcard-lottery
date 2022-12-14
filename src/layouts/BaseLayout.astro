@@ -1,13 +1,29 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import ScratchcardHeader from "../components/ScratchcardHeader.astro";
+
+export enum HeaderType {
+    DEFAULT,
+    SCRATCH,
+}
+
+export interface Props {
+    title: string;
+    description: string;
+    headertype?: HeaderType;
+}
+
+const { title, description, headertype = HeaderType.DEFAULT } = Astro.props;
+---
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <hr>
-    <slot />
-</body>
+    <head>
+        <BaseHead title={title} description={description} />
+    </head>
+    <body>
+        {headertype === HeaderType.DEFAULT ? <Header /> : <ScratchcardHeader />}
+        <slot />
+    </body>
 </html>

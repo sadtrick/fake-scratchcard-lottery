@@ -1,5 +1,5 @@
 ---
-import BaseLayout from "../../../layouts/BaseLayout.astro";
+import BaseLayout, { HeaderType } from "../../../layouts/BaseLayout.astro";
 import config from "./_config.json";
 
 export async function getStaticPaths() {
@@ -24,7 +24,7 @@ const { hash, theme } = Astro.params;
 const { name } = Astro.props;
 ---
 
-<BaseLayout>
+<BaseLayout title={name} description="" headertype={HeaderType.SCRATCH}>
     {hash}
     {theme}
     {name}
